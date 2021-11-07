@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "742989910579",
+    "project_id": "shabuapp-f7885",
+    "firebase_url": "https://shabuapp-f7885-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "storage_bucket": "shabuapp-f7885.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742989910579:android:3c106d783c6abf58a14946",
+        "android_client_info": {
+          "package_name": "com.example.shabu_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "742989910579-anf2j911fn3lu19ege5db0pn08icj7h6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM5R2xMSCPSPGiH9OoLX7WS_maYXPAHnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "742989910579-anf2j911fn3lu19ege5db0pn08icj7h6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
