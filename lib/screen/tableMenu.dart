@@ -118,95 +118,106 @@ class _TableMenuState extends State<TableMenu> {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Expanded(
-              flex: 12,
-              child: FirebaseAnimatedList(
-                query: dbfirebase,
-                itemBuilder: (context, snapshot, animation, index) {
-                  return Container(
-                    height: 80,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      child: Card(
-                        elevation: 5,
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            child: Image(
-                              image:
-                                  NetworkImage('${snapshot.value['imgURL']}'),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("asset/image/bg1.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 12,
+                child: FirebaseAnimatedList(
+                  query: dbfirebase,
+                  itemBuilder: (context, snapshot, animation, index) {
+                    return Container(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        child: Column(
+                          children: [
+                            Card(
+                              margin: EdgeInsets.all(10),
+                              elevation: 5,
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: NetworkImage(
+                                      '${snapshot.value['imgURL']}'),
+                                  //backgroundColor: pColor,
+                                ),
+                                title: Text(
+                                  '${snapshot.value['tName']}',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                //subtitle: Text('เมนู : ' + '${snapshot.value['tName']}'),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'จำนวน',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        sum("sub");
+                                        updateData(snapshot.key!,
+                                            snapshot.value['amonth'], "sub");
+                                      },
+                                      icon: Icon(Icons.do_disturb_on),
+                                    ),
+                                    Text(snapshot.value['amonth'].toString()),
+                                    IconButton(
+                                      onPressed: () {
+                                        sum("add");
+                                        updateData(snapshot.key!,
+                                            snapshot.value['amonth'], "add");
+                                      },
+                                      icon: Icon(Icons.add_circle),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            //backgroundColor: pColor,
-                          ),
-                          title: Text(
-                            '${snapshot.value['tName']}',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          //subtitle: Text('เมนู : ' + '${snapshot.value['tName']}'),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'จำนวน',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  sum("sub");
-                                  updateData(snapshot.key!,
-                                      snapshot.value['amonth'], "sub");
-                                },
-                                icon: Icon(Icons.do_disturb_on),
-                              ),
-                              Text(snapshot.value['amonth'].toString()),
-                              IconButton(
-                                onPressed: () {
-                                  sum("add");
-                                  updateData(snapshot.key!,
-                                      snapshot.value['amonth'], "add");
-                                },
-                                icon: Icon(Icons.add_circle),
-                              ),
-                            ],
-                          ),
+                          ],
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: sColor,
-                      padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      //shape: StadiumBorder(),
-                    ),
-                    child: Text(
-                      'สั่ง',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: pColor,
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: sColor,
+                        padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
+                        //shape: StadiumBorder(),
                       ),
+                      child: Text(
+                        'สั่ง',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: pColor,
+                        ),
+                      ),
+                      onPressed: () {
+                        orderN();
+                      },
                     ),
-                    onPressed: () {
-                      orderN();
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
