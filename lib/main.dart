@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'Index': (context) => Index(),
         'Login': (context) => Login(),
-        'EditFood': (context) => EditFood(),
+        //'EditFood': (context) => EditFood(),
         'AddFood': (context) => AddFood(),
         'Test': (context) => HomePage(),
         'Kitchen': (context) => Kitchen(),

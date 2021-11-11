@@ -13,7 +13,6 @@ class TableMenu extends StatefulWidget {
 }
 
 class _TableMenuState extends State<TableMenu> {
-  int num1 = 0;
   //ประกาศตัวแปรอ้างอิงไปยัง Child ที่ต้องการ
   final dbfirebase = FirebaseDatabase.instance.reference().child('Food');
   //Function สำหรับแก้ไขข้อมูล
@@ -67,7 +66,7 @@ class _TableMenuState extends State<TableMenu> {
 
   Future<void> orderN() async {
     var db = FirebaseDatabase.instance.reference().child("Food");
-    db.once().then((DataSnapshot snapshot) {
+    db.once().then((DataSnapshot snapshot) async {
       Map<dynamic, dynamic> values = snapshot.value;
       //print(values.toString());
       values.forEach((k, v) async {
@@ -85,7 +84,6 @@ class _TableMenuState extends State<TableMenu> {
             'imgURL': v["imgURL"],
             'amonth': v["amonth"],
           }).then((value) {
-            _order(widget.tableName);
             print("Update Success");
             dbfirebase.child(k).update({
               'amonth': 0,
@@ -99,8 +97,10 @@ class _TableMenuState extends State<TableMenu> {
             print(onError.code);
             print(onError.message);
           });
+          //
         }
       });
+      await _order(widget.tableName);
     });
   }
 
@@ -167,7 +167,6 @@ class _TableMenuState extends State<TableMenu> {
                                     ),
                                     IconButton(
                                       onPressed: () {
-                                        sum("sub");
                                         updateData(snapshot.key!,
                                             snapshot.value['amonth'], "sub");
                                       },
@@ -176,7 +175,6 @@ class _TableMenuState extends State<TableMenu> {
                                     Text(snapshot.value['amonth'].toString()),
                                     IconButton(
                                       onPressed: () {
-                                        sum("add");
                                         updateData(snapshot.key!,
                                             snapshot.value['amonth'], "add");
                                       },
@@ -236,22 +234,5 @@ class _TableMenuState extends State<TableMenu> {
       ),
     );
     print(tableName);
-  }
-
-  int sum(String op) {
-    if (op == "add") {
-      num1++;
-    } else {
-      num1--;
-    }
-    if (num1 <= 0) {
-      num1 = 0;
-    }
-    if (num1 >= 20) {
-      num1 = 20;
-    }
-    setState(() {});
-    print(num1);
-    return num1;
   }
 }

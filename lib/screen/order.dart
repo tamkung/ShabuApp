@@ -71,7 +71,9 @@ class _OrderState extends State<Order> {
                   query: dbfirebase,
                   itemBuilder: (context, snapshot, animation, index) {
                     return Container(
-                      height: 80,
+                      height: 100,
+                      //color: Colors.white,
+                      //alignment: Alignment.center,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                         child: Card(
@@ -115,27 +117,6 @@ class _OrderState extends State<Order> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: sColor,
-                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        //shape: StadiumBorder(),
-                      ),
-                      child: Text(
-                        'แก้ไข',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: pColor,
-                        ),
-                      ),
-                      onPressed: () {
-                        //orderN();
-                      },
-                    ),
-                    SizedBox(
-                      width: 50,
-                    ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: sColor,
@@ -203,7 +184,7 @@ class _OrderState extends State<Order> {
                 print('Confirmed');
                 dbfirebase.remove();
                 Navigator.of(context).pop();
-                Navigator.pushNamed(context, 'ETable', arguments: []);
+                //Navigator.pushNamed(context, 'TableMenu', arguments: []);
               },
             ),
             TextButton(

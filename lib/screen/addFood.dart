@@ -148,37 +148,44 @@ class _AddFoodState extends State<AddFood> {
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton.icon(
-                      onPressed: () => _upload('camera'),
-                      icon: Icon(Icons.camera),
-                      label: Text('camera'),
-                      style: ElevatedButton.styleFrom(
-                        primary: pColor,
+                Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ElevatedButton.icon(
+                            onPressed: () => _upload('camera'),
+                            icon: Icon(Icons.camera),
+                            label: Text('camera'),
+                            style: ElevatedButton.styleFrom(
+                              primary: pColor,
+                            ),
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: () => _upload('gallery'),
+                            icon: Icon(Icons.library_add),
+                            label: Text('Gallery'),
+                            style: ElevatedButton.styleFrom(
+                              primary: pColor,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: () => _upload('gallery'),
-                      icon: Icon(Icons.library_add),
-                      label: Text('Gallery'),
-                      style: ElevatedButton.styleFrom(
-                        primary: pColor,
+                      txtName(),
+                      Center(
+                        child: file == null
+                            ? Text('Not Found')
+                            : Image.file(
+                                file,
+                                scale: 5,
+                              ),
                       ),
-                    ),
-                  ],
+                      btnSubmit(),
+                    ],
+                  ),
                 ),
-                txtName(),
-                Center(
-                  child: file == null
-                      ? Text('Not Found')
-                      : Image.file(
-                          file,
-                          scale: 5,
-                        ),
-                ),
-                btnSubmit(),
                 SizedBox(
                   height: 20,
                 ),

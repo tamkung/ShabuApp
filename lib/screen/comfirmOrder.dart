@@ -78,10 +78,8 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
                           elevation: 5,
                           child: ListTile(
                             leading: CircleAvatar(
-                              child: Image(
-                                image:
-                                    NetworkImage('${snapshot.value['imgURL']}'),
-                              ),
+                              backgroundImage:
+                                  NetworkImage('${snapshot.value['imgURL']}'),
                               //backgroundColor: pColor,
                             ),
                             title: Text(
@@ -131,7 +129,7 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
                       onPressed: () {
                         dbfirebase.remove();
                         Navigator.of(context).pop();
-                        Navigator.pushNamed(context, 'Kitchen', arguments: []);
+                        //Navigator.pushNamed(context, 'Kitchen', arguments: []);
                       },
                     ),
                   ],

@@ -14,7 +14,6 @@ class Food extends StatefulWidget {
 }
 
 class _FoodState extends State<Food> {
-  var ss;
   //ประกาศตัวแปรอ้างอิงไปยัง Child ที่ต้องการ
   final dbfirebase = FirebaseDatabase.instance.reference().child('Food');
   //Function สำหรับแก้ไขข้อมูล
@@ -59,7 +58,6 @@ class _FoodState extends State<Food> {
           child: FirebaseAnimatedList(
             query: dbfirebase,
             itemBuilder: (context, snapshot, animation, index) {
-              ss = snapshot;
               return Container(
                 //height: 100,
                 child: Padding(
@@ -88,12 +86,15 @@ class _FoodState extends State<Food> {
                         children: [
                           IconButton(
                             icon: Icon(Icons.edit),
-                            onPressed: () {},
+                            onPressed: () {
+                              _edit(snapshot.key);
+                              //print(snapshot.key);
+                            },
                           ),
                           IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () {
-                              _showMyDialog();
+                              _showMyDialog(snapshot.key);
                               //dbfirebase.child(snapshot.key!).remove();
                             },
                           ),
@@ -110,7 +111,7 @@ class _FoodState extends State<Food> {
     );
   }
 
-  Future<void> _showMyDialog() async {
+  Future<void> _showMyDialog(var key) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -146,7 +147,8 @@ class _FoodState extends State<Food> {
               ),
               onPressed: () {
                 print('Confirmed');
-                dbfirebase.child(ss.key!).remove();
+                dbfirebase.child(key).remove();
+                //print(key);
                 Navigator.of(context).pop();
               },
             ),
@@ -166,5 +168,17 @@ class _FoodState extends State<Food> {
         );
       },
     );
+  }
+
+  Future _edit(dynamic foodKey) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => EditFood(
+          foodKey: foodKey,
+        ),
+      ),
+    );
+    print(foodKey);
   }
 }
