@@ -56,81 +56,89 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Expanded(
-              flex: 12,
-              child: FirebaseAnimatedList(
-                query: dbfirebase,
-                itemBuilder: (context, snapshot, animation, index) {
-                  return Container(
-                    height: 80,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      child: Card(
-                        elevation: 5,
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            child: Image(
-                              image:
-                                  NetworkImage('${snapshot.value['imgURL']}'),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("asset/image/bg1.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 12,
+                child: FirebaseAnimatedList(
+                  query: dbfirebase,
+                  itemBuilder: (context, snapshot, animation, index) {
+                    return Container(
+                      height: 100,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        child: Card(
+                          elevation: 5,
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              child: Image(
+                                image:
+                                    NetworkImage('${snapshot.value['imgURL']}'),
+                              ),
+                              //backgroundColor: pColor,
                             ),
-                            //backgroundColor: pColor,
-                          ),
-                          title: Text(
-                            '${snapshot.value['tName']}',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          //subtitle: Text('เมนู : ' + '${snapshot.value['tName']}'),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'จำนวน',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(snapshot.value['amonth'].toString()),
-                            ],
+                            title: Text(
+                              '${snapshot.value['tName']}',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            //subtitle: Text('เมนู : ' + '${snapshot.value['tName']}'),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'จำนวน',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(snapshot.value['amonth'].toString()),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: sColor,
-                      padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      //shape: StadiumBorder(),
-                    ),
-                    child: Text(
-                      'ส่งอาหาร',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: pColor,
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: sColor,
+                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        //shape: StadiumBorder(),
                       ),
+                      child: Text(
+                        'ส่งอาหาร',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: pColor,
+                        ),
+                      ),
+                      onPressed: () {
+                        dbfirebase.remove();
+                        Navigator.of(context).pop();
+                        Navigator.pushNamed(context, 'Kitchen', arguments: []);
+                      },
                     ),
-                    onPressed: () {
-                      dbfirebase.remove();
-                      Navigator.of(context).pop();
-                      Navigator.pushNamed(context, 'Kitchen', arguments: []);
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

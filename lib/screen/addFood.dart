@@ -135,81 +135,89 @@ class _AddFoodState extends State<AddFood> {
         ),
         centerTitle: true,
       ),
-      body: Form(
-        key: formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton.icon(
-                    onPressed: () => _upload('camera'),
-                    icon: Icon(Icons.camera),
-                    label: Text('camera'),
-                    style: ElevatedButton.styleFrom(
-                      primary: pColor,
-                    ),
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () => _upload('gallery'),
-                    icon: Icon(Icons.library_add),
-                    label: Text('Gallery'),
-                    style: ElevatedButton.styleFrom(
-                      primary: pColor,
-                    ),
-                  ),
-                ],
-              ),
-              txtName(),
-              Center(
-                child: file == null
-                    ? Text('Not Found')
-                    : Image.file(
-                        file,
-                        scale: 5,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("asset/image/bg1.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Form(
+          key: formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: () => _upload('camera'),
+                      icon: Icon(Icons.camera),
+                      label: Text('camera'),
+                      style: ElevatedButton.styleFrom(
+                        primary: pColor,
                       ),
-              ),
-              btnSubmit(),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: FirebaseAnimatedList(
-                  query: dbfirebase,
-                  itemBuilder: (context, snapshot, animation, index) {
-                    return Container(
-                      //height: 100,
-                      child: Padding(
-                        padding: EdgeInsets.all(3.0),
-                        child: Card(
-                          elevation: 5,
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              radius: 28,
-                              backgroundImage:
-                                  NetworkImage('${snapshot.value['imgURL']}'),
-                              //backgroundColor: pColor,
-                            ),
-                            title: Text(
-                              '${snapshot.value['tName']}',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () => _upload('gallery'),
+                      icon: Icon(Icons.library_add),
+                      label: Text('Gallery'),
+                      style: ElevatedButton.styleFrom(
+                        primary: pColor,
+                      ),
+                    ),
+                  ],
+                ),
+                txtName(),
+                Center(
+                  child: file == null
+                      ? Text('Not Found')
+                      : Image.file(
+                          file,
+                          scale: 5,
+                        ),
+                ),
+                btnSubmit(),
+                SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: FirebaseAnimatedList(
+                    query: dbfirebase,
+                    itemBuilder: (context, snapshot, animation, index) {
+                      return Container(
+                        //height: 100,
+                        child: Padding(
+                          padding: EdgeInsets.all(3.0),
+                          child: Card(
+                            elevation: 5,
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                radius: 28,
+                                backgroundImage:
+                                    NetworkImage('${snapshot.value['imgURL']}'),
+                                //backgroundColor: pColor,
                               ),
-                            ),
-                            subtitle: Row(
-                              children: [],
+                              title: Text(
+                                '${snapshot.value['tName']}',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Row(
+                                children: [],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

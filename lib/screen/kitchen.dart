@@ -56,7 +56,7 @@ class _KitchenState extends State<Kitchen> {
                   query: dbfirebase,
                   itemBuilder: (context, snapshot, animation, index) {
                     return Container(
-                      //height: 120,
+                      height: 100,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                         child: Card(
