@@ -104,6 +104,7 @@ class _MainMenuState extends State<MainMenu> {
                     Navigator.pushNamed(context, 'Food');
                   },
                 ),
+                /*
                 SizedBox(
                   height: size.height * 0.03,
                 ),
@@ -124,7 +125,7 @@ class _MainMenuState extends State<MainMenu> {
                   onPressed: () {
                     Navigator.pushNamed(context, 'AllTable');
                   },
-                ),
+                ),*/
                 SizedBox(
                   height: size.height * 0.03,
                 ),

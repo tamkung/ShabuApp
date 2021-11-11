@@ -41,80 +41,89 @@ class _KitchenState extends State<Kitchen> {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Expanded(
-              flex: 12,
-              child: FirebaseAnimatedList(
-                query: dbfirebase,
-                itemBuilder: (context, snapshot, animation, index) {
-                  return Container(
-                    //height: 120,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      child: Card(
-                        elevation: 5,
-                        child: ListTile(
-                          onTap: () {
-                            confirmO(snapshot.key.toString());
-                          },
-                          leading: CircleAvatar(child: Icon(Icons.food_bank)
-                              //backgroundColor: pColor,
-                              ),
-                          title: Text(
-                            '${snapshot.key}',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          /*
-                          subtitle: Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Text('${snapshot.key}'),
-                                  Text(' สถานะ : ' +
-                                      '${snapshot.value['status']}'),
-                                  Text(' สถานะ : ' +
-                                      '${snapshot.value['status']}'),
-                                  Text(' สถานะ : ' +
-                                      '${snapshot.value['status']}'),
-                                  Text(' สถานะ : ' +
-                                      '${snapshot.value['status']}'),
-                                ],
-                              ),
-                            ],
-                          ),*/
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              //if(dbfirebase.length)
-                              Text(
-                                'จำนวน',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                '${snapshot.value.length}',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'รายการ',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ],
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("asset/image/bg1.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 12,
+                child: FirebaseAnimatedList(
+                  query: dbfirebase,
+                  itemBuilder: (context, snapshot, animation, index) {
+                    return Container(
+                      //height: 120,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        child: Card(
+                          color: Colors.white.withOpacity(0.8),
+                          elevation: 5,
+                          child: ListTile(
+                            onTap: () {
+                              confirmO(snapshot.key.toString());
+                            },
+                            leading: CircleAvatar(child: Icon(Icons.food_bank)
+                                //backgroundColor: pColor,
+                                ),
+                            title: Text(
+                              '${snapshot.key}',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            /*
+                            subtitle: Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    Text('${snapshot.key}'),
+                                    Text(' สถานะ : ' +
+                                        '${snapshot.value['status']}'),
+                                    Text(' สถานะ : ' +
+                                        '${snapshot.value['status']}'),
+                                    Text(' สถานะ : ' +
+                                        '${snapshot.value['status']}'),
+                                    Text(' สถานะ : ' +
+                                        '${snapshot.value['status']}'),
+                                  ],
+                                ),
+                              ],
+                            ),*/
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                //if(dbfirebase.length)
+                                Text(
+                                  'จำนวน',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  '${snapshot.value.length}',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'รายการ',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

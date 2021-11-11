@@ -1,7 +1,4 @@
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shabu_app/config/constant.dart';
 import 'package:shabu_app/screen/tableMenu.dart';
 
@@ -13,74 +10,265 @@ class ETable extends StatefulWidget {
 }
 
 class _ETableState extends State<ETable> {
-  final dbfirebase = FirebaseDatabase.instance.reference().child('Table');
-  //Function สำหรับแก้ไขข้อมูล
-  Future<void> updateData(String key) async {
-    try {
-      dbfirebase
-          .child(key)
-          .update({
-            'status': "ขายแล้ว",
-          })
-          .then((value) => print('Success'))
-          .catchError((onError) {
-            print(onError.code);
-            print(onError.message);
-          });
-    } catch (e) {
-      print(e);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "สั่งอาหาร",
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "สั่งอาหาร",
+          style: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("asset/image/bg1.png"),
-              fit: BoxFit.cover,
-            ),
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("asset/image/bg1.png"),
+            fit: BoxFit.cover,
           ),
-          child: FirebaseAnimatedList(
-            query: dbfirebase,
-            itemBuilder: (context, snapshot, animation, index) {
-              return Container(
-                child: Padding(
-                  padding: EdgeInsets.all(3.0),
-                  child: Card(
-                    //color: Colors.white.withOpacity(0.7),
-                    elevation: 5,
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        child: Icon(Icons.table_chart),
-                        backgroundColor: pColor,
-                      ),
-                      title: Text(
-                        '${snapshot.value['tName']}',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onTap: () => _order('${snapshot.value['tName']}'),
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: sColor,
+                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
+                    //shape: StadiumBorder(),
+                  ),
+                  child: Text(
+                    'โต๊ะที่ : 1',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: pColor,
                     ),
                   ),
+                  onPressed: () {
+                    _order('โต๊ะที่ : 1');
+                  },
                 ),
-              );
-            },
-          ),
+                SizedBox(
+                  width: 100,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: sColor,
+                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
+                    //shape: StadiumBorder(),
+                  ),
+                  child: Text(
+                    'โต๊ะที่ : 2',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: pColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    _order('โต๊ะที่ : 2');
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: sColor,
+                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
+                    //shape: StadiumBorder(),
+                  ),
+                  child: Text(
+                    'โต๊ะที่ : 3',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: pColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    _order('โต๊ะที่ : 3');
+                  },
+                ),
+                SizedBox(
+                  width: 100,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: sColor,
+                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
+                    //shape: StadiumBorder(),
+                  ),
+                  child: Text(
+                    'โต๊ะที่ : 4',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: pColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    _order('โต๊ะที่ : 4');
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: sColor,
+                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
+                    //shape: StadiumBorder(),
+                  ),
+                  child: Text(
+                    'โต๊ะที่ : 5',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: pColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    _order('โต๊ะที่ : 5');
+                  },
+                ),
+                SizedBox(
+                  width: 100,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: sColor,
+                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
+                    //shape: StadiumBorder(),
+                  ),
+                  child: Text(
+                    'โต๊ะที่ : 6',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: pColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    _order('โต๊ะที่ : 6');
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: sColor,
+                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
+                    //shape: StadiumBorder(),
+                  ),
+                  child: Text(
+                    'โต๊ะที่ : 7',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: pColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    _order('โต๊ะที่ : 7');
+                  },
+                ),
+                SizedBox(
+                  width: 100,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: sColor,
+                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
+                    //shape: StadiumBorder(),
+                  ),
+                  child: Text(
+                    'โต๊ะที่ : 8',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: pColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    _order('โต๊ะที่ : 8');
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: sColor,
+                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
+                    //shape: StadiumBorder(),
+                  ),
+                  child: Text(
+                    'โต๊ะที่ : 9',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: pColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    _order('โต๊ะที่ : 9');
+                  },
+                ),
+                SizedBox(
+                  width: 100,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: sColor,
+                    padding: EdgeInsets.fromLTRB(40, 50, 40, 50),
+                    //shape: StadiumBorder(),
+                  ),
+                  child: Text(
+                    'โต๊ะที่ : 10',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      color: pColor,
+                    ),
+                  ),
+                  onPressed: () {
+                    _order('โต๊ะที่ : 10');
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

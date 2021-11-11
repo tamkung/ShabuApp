@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
@@ -53,18 +54,17 @@ class _AddFoodState extends State<AddFood> {
 
   Future<void> createData() async {
     try {
-      // Uploading the selected image with some custom meta data
+      /*
       await storage.ref('Image').child(fileName!).putFile(
             imageFile!,
             SettableMetadata(
               customMetadata: {
-                'uploaded_by': 'A bad guy',
+                'uploaded_by': 'Admin',
                 'description': 'Some description...'
               },
             ),
           );
-
-      // Refresh the UI
+      */
       TaskSnapshot snapshot =
           await storage.ref().child("Image/$fileName").putFile(file);
       if (snapshot.state == TaskState.success) {
@@ -72,13 +72,14 @@ class _AddFoodState extends State<AddFood> {
         await dbfirebase.push().set({
           'tName': name,
           'imgURL': downloadUrl,
+          'amonth': 0,
         }).then((value) {
           print("Success");
         }).catchError((onError) {
           print(onError.code);
           print(onError.message);
         });
-        final snackBar = SnackBar(content: Text('Yay! Success'));
+        final snackBar = SnackBar(content: Text('เพิ่มสำเร็จ'));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         print(fileName);
         print(imageFile);
@@ -93,8 +94,6 @@ class _AddFoodState extends State<AddFood> {
     }
   }
 
-  // Retriew the uploaded images
-  // This function is called when the app launches for the first time or when an image is uploaded or deleted
   Future<List<Map<String, dynamic>>> _loadImages() async {
     List<Map<String, dynamic>> files = [];
 
@@ -117,8 +116,6 @@ class _AddFoodState extends State<AddFood> {
     return files;
   }
 
-  // Delete the selected image
-  // This function is called when a trash icon is pressed
   Future<void> _delete(String ref) async {
     await storage.ref(ref).delete();
     // Rebuild the UI
@@ -129,25 +126,40 @@ class _AddFoodState extends State<AddFood> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add'),
+        title: Text(
+          "เพิ่มเมนูอาหาร",
+          style: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Form(
         key: formKey,
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton.icon(
-                      onPressed: () => _upload('camera'),
-                      icon: Icon(Icons.camera),
-                      label: Text('camera')),
+                    onPressed: () => _upload('camera'),
+                    icon: Icon(Icons.camera),
+                    label: Text('camera'),
+                    style: ElevatedButton.styleFrom(
+                      primary: pColor,
+                    ),
+                  ),
                   ElevatedButton.icon(
-                      onPressed: () => _upload('gallery'),
-                      icon: Icon(Icons.library_add),
-                      label: Text('Gallery')),
+                    onPressed: () => _upload('gallery'),
+                    icon: Icon(Icons.library_add),
+                    label: Text('Gallery'),
+                    style: ElevatedButton.styleFrom(
+                      primary: pColor,
+                    ),
+                  ),
                 ],
               ),
               txtName(),
@@ -160,40 +172,39 @@ class _AddFoodState extends State<AddFood> {
                       ),
               ),
               btnSubmit(),
+              SizedBox(
+                height: 20,
+              ),
               Expanded(
-                child: FutureBuilder(
-                  future: _loadImages(),
-                  builder: (context,
-                      AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return ListView.builder(
-                        itemCount: snapshot.data?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          final Map<String, dynamic> image =
-                              snapshot.data![index];
-
-                          return Card(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            child: ListTile(
-                              dense: false,
-                              leading: Image.network(image['url']),
-                              title: Text(image['uploaded_by']),
-                              subtitle: Text(image['description']),
-                              trailing: IconButton(
-                                onPressed: () => _delete(image['path']),
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                ),
+                child: FirebaseAnimatedList(
+                  query: dbfirebase,
+                  itemBuilder: (context, snapshot, animation, index) {
+                    return Container(
+                      //height: 100,
+                      child: Padding(
+                        padding: EdgeInsets.all(3.0),
+                        child: Card(
+                          elevation: 5,
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              radius: 28,
+                              backgroundImage:
+                                  NetworkImage('${snapshot.value['imgURL']}'),
+                              //backgroundColor: pColor,
+                            ),
+                            title: Text(
+                              '${snapshot.value['tName']}',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          );
-                        },
-                      );
-                    }
-
-                    return Center(
-                      child: CircularProgressIndicator(),
+                            subtitle: Row(
+                              children: [],
+                            ),
+                          ),
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -214,7 +225,7 @@ class _AddFoodState extends State<AddFood> {
         ),
         decoration: InputDecoration(
           labelText: 'ชื่อเมนู :',
-          icon: Icon(Icons.production_quantity_limits),
+          icon: Icon(Icons.food_bank),
           hintText: 'Input your table name',
         ),
         validator: (value) {
@@ -238,6 +249,7 @@ class _AddFoodState extends State<AddFood> {
             formKey.currentState!.save();
             createData();
             formKey.currentState!.reset();
+            file = null;
           }
         },
         child: Text('เพิ่ม'),

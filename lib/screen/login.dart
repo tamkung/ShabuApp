@@ -178,15 +178,14 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           onPressed: () {
-                            /*
                             if (formKey.currentState!.validate()) {
                               formKey.currentState!.save();
                               checkUser();
                             }
                             print(email);
                             print(password);
-                            */
-                            Navigator.pushNamed(context, 'MainMenu');
+
+                            //Navigator.pushNamed(context, 'MainMenu');
                           },
                         ),
                       ),

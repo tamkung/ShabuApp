@@ -56,102 +56,171 @@ class _OrderState extends State<Order> {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Expanded(
-              flex: 12,
-              child: FirebaseAnimatedList(
-                query: dbfirebase,
-                itemBuilder: (context, snapshot, animation, index) {
-                  return Container(
-                    height: 80,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      child: Card(
-                        elevation: 5,
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            child: Image(
-                              image:
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("asset/image/bg1.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 12,
+                child: FirebaseAnimatedList(
+                  query: dbfirebase,
+                  itemBuilder: (context, snapshot, animation, index) {
+                    return Container(
+                      height: 80,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        child: Card(
+                          elevation: 5,
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              radius: 29,
+                              backgroundImage:
                                   NetworkImage('${snapshot.value['imgURL']}'),
                             ),
-                            //backgroundColor: pColor,
-                          ),
-                          title: Text(
-                            '${snapshot.value['tName']}',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          //subtitle: Text('เมนู : ' + '${snapshot.value['tName']}'),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'จำนวน',
-                                style: TextStyle(fontSize: 16),
+                            title: Text(
+                              '${snapshot.value['tName']}',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(snapshot.value['amonth'].toString()),
-                            ],
+                            ),
+                            //subtitle: Text('เมนู : ' + '${snapshot.value['tName']}'),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'จำนวน',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(snapshot.value['amonth'].toString()),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: sColor,
-                      padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      //shape: StadiumBorder(),
-                    ),
-                    child: Text(
-                      'แก้ไข',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: pColor,
+              Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: sColor,
+                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        //shape: StadiumBorder(),
                       ),
-                    ),
-                    onPressed: () {
-                      //orderN();
-                    },
-                  ),
-                  SizedBox(
-                    width: 50,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: sColor,
-                      padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      //shape: StadiumBorder(),
-                    ),
-                    child: Text(
-                      'ยกเลิก',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: pColor,
+                      child: Text(
+                        'แก้ไข',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: pColor,
+                        ),
                       ),
+                      onPressed: () {
+                        //orderN();
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+                    SizedBox(
+                      width: 50,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: sColor,
+                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        //shape: StadiumBorder(),
+                      ),
+                      child: Text(
+                        'ยกเลิก',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: pColor,
+                        ),
+                      ),
+                      onPressed: () {
+                        _showMyDialog();
+                        //Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'ยืนยันการยกเลิก',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text(
+                  'คุณแน่ใจใช่ไหมที่จะยกเลิกรายการอาหาร',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'ยืนยัน',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                print('Confirmed');
+                dbfirebase.remove();
+                Navigator.of(context).pop();
+                Navigator.pushNamed(context, 'ETable', arguments: []);
+              },
+            ),
+            TextButton(
+              child: Text(
+                'ยกเลิก',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

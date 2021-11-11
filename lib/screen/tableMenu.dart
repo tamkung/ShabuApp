@@ -138,18 +138,21 @@ class _TableMenuState extends State<TableMenu> {
                         child: Column(
                           children: [
                             Card(
-                              margin: EdgeInsets.all(10),
+                              margin: EdgeInsets.all(5),
                               elevation: 5,
                               child: ListTile(
                                 leading: CircleAvatar(
-                                  radius: 30,
+                                  radius: 29,
                                   backgroundImage: NetworkImage(
                                       '${snapshot.value['imgURL']}'),
                                   //backgroundColor: pColor,
                                 ),
                                 title: Text(
                                   '${snapshot.value['tName']}',
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 //subtitle: Text('เมนู : ' + '${snapshot.value['tName']}'),
                                 trailing: Row(
