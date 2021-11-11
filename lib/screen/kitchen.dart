@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:shabu_app/config/constant.dart';
+import 'package:shabu_app/screen/comfirmOrder.dart';
 
 class Kitchen extends StatefulWidget {
   const Kitchen({Key? key}) : super(key: key);
@@ -15,6 +18,121 @@ class _KitchenState extends State<Kitchen> {
     print('True');
   }
 
+  var dbfirebase;
+  Future<void> getData() async {
+    dbfirebase = FirebaseDatabase.instance.reference().child('Order');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    setState(() {
+      getData();
+      //orderN();
+    });
+    return Flexible(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "ห้องครัว",
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              flex: 12,
+              child: FirebaseAnimatedList(
+                query: dbfirebase,
+                itemBuilder: (context, snapshot, animation, index) {
+                  return Container(
+                    //height: 120,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                      child: Card(
+                        elevation: 5,
+                        child: ListTile(
+                          onTap: () {
+                            confirmO(snapshot.key.toString());
+                          },
+                          leading: CircleAvatar(child: Icon(Icons.food_bank)
+                              //backgroundColor: pColor,
+                              ),
+                          title: Text(
+                            '${snapshot.key}',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          /*
+                          subtitle: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Text('${snapshot.key}'),
+                                  Text(' สถานะ : ' +
+                                      '${snapshot.value['status']}'),
+                                  Text(' สถานะ : ' +
+                                      '${snapshot.value['status']}'),
+                                  Text(' สถานะ : ' +
+                                      '${snapshot.value['status']}'),
+                                  Text(' สถานะ : ' +
+                                      '${snapshot.value['status']}'),
+                                ],
+                              ),
+                            ],
+                          ),*/
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              //if(dbfirebase.length)
+                              Text(
+                                'จำนวน',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                '${snapshot.value.length}',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'รายการ',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future confirmO(String tableName) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ConfirmOrder(
+          tableName: tableName,
+        ),
+      ),
+    );
+    print(tableName);
+  }
+}
+/*
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -159,3 +277,4 @@ class _KitchenState extends State<Kitchen> {
     );
   }
 }
+*/

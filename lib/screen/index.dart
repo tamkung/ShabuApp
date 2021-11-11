@@ -48,7 +48,7 @@ class Index extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, 'AllTable');
+                    Navigator.pushNamed(context, 'ETable');
                   },
                 ),
                 SizedBox(

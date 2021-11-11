@@ -80,7 +80,7 @@ class _MainMenuState extends State<MainMenu> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, 'AllTable');
+                    Navigator.pushNamed(context, 'AddFood');
                   },
                 ),
                 SizedBox(
@@ -101,7 +101,7 @@ class _MainMenuState extends State<MainMenu> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, 'Login');
+                    Navigator.pushNamed(context, 'Food');
                   },
                 ),
                 SizedBox(
@@ -122,7 +122,7 @@ class _MainMenuState extends State<MainMenu> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, 'Login');
+                    Navigator.pushNamed(context, 'AllTable');
                   },
                 ),
                 SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shabu_app/config/constant.dart';
+import 'package:shabu_app/screen/tableMenu.dart';
 
 class ETable extends StatefulWidget {
   const ETable({Key? key}) : super(key: key);
@@ -53,7 +54,7 @@ class _ETableState extends State<ETable> {
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, 'Login');
+                    _order('โต๊ะที่ : 1');
                   },
                 ),
                 SizedBox(
@@ -74,7 +75,7 @@ class _ETableState extends State<ETable> {
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, 'Login');
+                    _order('โต๊ะที่ : 2');
                   },
                 ),
               ],
@@ -100,7 +101,7 @@ class _ETableState extends State<ETable> {
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, 'Login');
+                    _order('โต๊ะที่ : 3');
                   },
                 ),
                 SizedBox(
@@ -121,7 +122,7 @@ class _ETableState extends State<ETable> {
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, 'Login');
+                    _order('โต๊ะที่ : 4');
                   },
                 ),
               ],
@@ -147,7 +148,7 @@ class _ETableState extends State<ETable> {
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, 'Login');
+                    _order('โต๊ะที่ : 5');
                   },
                 ),
                 SizedBox(
@@ -168,7 +169,7 @@ class _ETableState extends State<ETable> {
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, 'Login');
+                    _order('โต๊ะที่ : 6');
                   },
                 ),
               ],
@@ -194,7 +195,7 @@ class _ETableState extends State<ETable> {
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, 'Login');
+                    _order('โต๊ะที่ : 7');
                   },
                 ),
                 SizedBox(
@@ -215,7 +216,7 @@ class _ETableState extends State<ETable> {
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, 'Login');
+                    _order('โต๊ะที่ : 8');
                   },
                 ),
               ],
@@ -241,7 +242,7 @@ class _ETableState extends State<ETable> {
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, 'Login');
+                    _order('โต๊ะที่ : 9');
                   },
                 ),
                 SizedBox(
@@ -262,7 +263,7 @@ class _ETableState extends State<ETable> {
                     ),
                   ),
                   onPressed: () {
-                    //Navigator.pushNamed(context, 'Login');
+                    _order('โต๊ะที่ : 10');
                   },
                 ),
               ],
@@ -271,5 +272,17 @@ class _ETableState extends State<ETable> {
         ),
       ),
     );
+  }
+
+  Future _order(String tableName) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => TableMenu(
+          tableName: tableName,
+        ),
+      ),
+    );
+    print(tableName);
   }
 }
