@@ -11,7 +11,7 @@ Widget buildMenu(MenuR recome, int index) {
     ),
     padding: EdgeInsets.all(16),
     margin: EdgeInsets.only(right: 16, left: index == 0 ? 16 : 0),
-    width: 380,
+    width: 700,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
@@ -25,20 +25,20 @@ Widget buildMenu(MenuR recome, int index) {
               Radius.circular(15),
             ),
           ),
-          height: 300,
-          width: 340,
+          height: 750,
+          width: 600,
         ),
         SizedBox(
           height: 16,
         ),
-        Text(
+        /*Text(
           recome.name,
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
             height: 1,
           ),
-        ),
+        ),*/
         /*
         Text(
           dealer.offers.toString() + " offers",

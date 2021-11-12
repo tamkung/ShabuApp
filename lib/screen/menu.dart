@@ -57,14 +57,14 @@ class _MainMenuState extends State<MainMenu> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: size.height * 0.03,
+                  height: size.height * 0.01,
                   width: size.width,
                 ),
-                Image.asset(
+                /*Image.asset(
                   "asset/image/logo.png",
                   width: size.width * 0.35,
                   //height: size.height * 0.4,
-                ),
+                ),*/
                 Column(
                   children: [
                     Padding(
@@ -73,7 +73,7 @@ class _MainMenuState extends State<MainMenu> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "เมนูแนะนำ",
+                            "พนักงานควรอ่าน",
                             //textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 36,
@@ -85,7 +85,7 @@ class _MainMenuState extends State<MainMenu> {
                       ),
                     ),
                     Container(
-                      height: 380,
+                      height: 800,
                       child: ListView(
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
@@ -95,7 +95,7 @@ class _MainMenuState extends State<MainMenu> {
                   ],
                 ),
                 SizedBox(
-                  height: size.height * 0.08,
+                  height: size.height * 0.02,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

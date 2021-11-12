@@ -63,10 +63,10 @@ class _LoginState extends State<Login> {
                   width: size.width * 0.42,
                   //height: size.height * 0.4,
                 ),
-                Container(
+                /* Container(
                   width: size.width * 0.9,
                   height: size.height * 0.1,
-                  color: sColor,
+                  //  color: sColor,
                   alignment: Alignment.center,
                   child: Text(
                     'เข้าสู่ระบบ',
@@ -75,11 +75,11 @@ class _LoginState extends State<Login> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
+                ),*/
                 Container(
                   width: size.width * 0.9,
                   height: size.height * 0.12,
-                  color: Colors.black87,
+                  // color: Colors.black87,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -119,7 +119,7 @@ class _LoginState extends State<Login> {
                 Container(
                   width: size.width * 0.9,
                   height: size.height * 0.12,
-                  color: Colors.black87,
+                  //      color: Colors.black87,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -159,7 +159,7 @@ class _LoginState extends State<Login> {
                 Container(
                   width: size.width * 0.9,
                   height: size.height * 0.12,
-                  color: Colors.black87,
+                  //  color: Colors.black87,
                   alignment: Alignment.center,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -180,14 +180,14 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           onPressed: () {
-                            /*if (formKey.currentState!.validate()) {
+                            if (formKey.currentState!.validate()) {
                               formKey.currentState!.save();
                               checkUser();
                             }
                             print(email);
                             print(password);
-*/
-                            Navigator.pushNamed(context, 'MainMenu');
+
+                            //  Navigator.pushNamed(context, 'MainMenu');
                           },
                         ),
                       ),

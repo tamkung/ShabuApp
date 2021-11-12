@@ -89,7 +89,10 @@ class _FoodState extends State<Food> {
                             },
                           ),
                           IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
                             onPressed: () {
                               _showMyDialog(snapshot.key);
                               //dbfirebase.child(snapshot.key!).remove();

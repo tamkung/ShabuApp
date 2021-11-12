@@ -28,27 +28,27 @@ List<MenuR> getMenuList() {
     MenuR(
       "ชุดเปิด",
       174,
-      "asset/image/bg1.png",
+      "asset/image/pro12.jpg",
     ),
     MenuR(
       "Avis",
       126,
-      "asset/image/logo.png",
+      "asset/image/pro11.jpg",
     ),
     MenuR(
       "Avis",
       126,
-      "asset/image/recom1.jpg",
+      "asset/image/pro13.jpg",
     ),
     MenuR(
       "Avis",
       126,
-      "asset/image/recom1.jpg",
+      "asset/image/pro14.jpg",
     ),
     MenuR(
       "Avis",
       126,
-      "asset/image/recom1.jpg",
+      "asset/image/pro15.jpg",
     ),
   ];
 }
@@ -102,29 +102,54 @@ class MenuRecom {
 List<MenuRecom> getMenuRecomList() {
   return <MenuRecom>[
     MenuRecom(
-      "ชุดเปิด",
+      "ซุปใส/ซุปน้ำดำ",
       174,
       "asset/image/water.jpg",
     ),
     MenuRecom(
-      "Avis",
+      "ซุปหมู/ซุปต้มยำ",
       126,
       "asset/image/water1.jpg",
     ),
     MenuRecom(
-      "Avis",
-      126,
-      "asset/image/water2.jpg",
-    ),
-    MenuRecom(
-      "Avis",
+      "ชุปน้ำดำ/ซุปข้น",
       126,
       "asset/image/water3.jpg",
     ),
     MenuRecom(
-      "Avis",
+      "เซ็ทน้ำจิ้ม1",
       126,
-      "asset/image/logo.png",
+      "asset/image/water5.jpg",
+    ),
+    MenuRecom(
+      "เซ็ทน้ำจิ้ม2",
+      126,
+      "asset/image/water4.jpg",
+    ),
+    MenuRecom(
+      "สันคอหมูสไลด์",
+      126,
+      "asset/image/mo.jpg",
+    ),
+    MenuRecom(
+      "สามชั้นสไลด์",
+      126,
+      "asset/image/mo1.jpg",
+    ),
+    MenuRecom(
+      "กุ้งแม่น้ำ",
+      126,
+      "asset/image/kung.jpg",
+    ),
+    MenuRecom(
+      "ซูชิ",
+      126,
+      "asset/image/shushi.jpg",
+    ),
+    MenuRecom(
+      "ชุดเปิด",
+      126,
+      "asset/image/recom1.jpg",
     ),
   ];
 }
