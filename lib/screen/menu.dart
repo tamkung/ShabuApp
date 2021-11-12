@@ -59,50 +59,65 @@ class _MainMenuState extends State<MainMenu> {
                 ),
                 Image.asset(
                   "asset/image/logo.png",
-                  width: size.width * 0.4,
+                  width: size.width * 0.35,
                   //height: size.height * 0.4,
                 ),
                 SizedBox(
-                  height: size.height * 0.07,
+                  height: size.height * 0.43,
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(47, 20, 47, 20),
-                    shape: StadiumBorder(),
-                  ),
-                  child: Text(
-                    'เพิ่มเมนูอาหาร',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton.icon(
+                      icon: Icon(
+                        Icons.add_box,
+                        color: pColor,
+                        size: 32,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: sColor,
+                        padding: EdgeInsets.fromLTRB(39, 19, 39, 19),
+                        shape: StadiumBorder(),
+                      ),
+                      label: Text(
+                        'เพิ่มเมนูอาหาร',
+                        style: TextStyle(
+                          fontSize: 34,
+                          fontWeight: FontWeight.bold,
+                          color: pColor,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'AddFood');
+                      },
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'AddFood');
-                  },
-                ),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
-                    shape: StadiumBorder(),
-                  ),
-                  child: Text(
-                    'แก้ไขเมนูอาหาร',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                    SizedBox(
+                      width: size.width * 0.07,
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'Food');
-                  },
+                    ElevatedButton.icon(
+                      icon: Icon(
+                        Icons.edit,
+                        color: pColor,
+                        size: 32,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: sColor,
+                        padding: EdgeInsets.fromLTRB(26, 20, 26, 20),
+                        shape: StadiumBorder(),
+                      ),
+                      label: Text(
+                        'แก้ไขเมนูอาหาร',
+                        style: TextStyle(
+                          fontSize: 34,
+                          fontWeight: FontWeight.bold,
+                          color: pColor,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'Food');
+                      },
+                    ),
+                  ],
                 ),
                 /*
                 SizedBox(
@@ -129,16 +144,21 @@ class _MainMenuState extends State<MainMenu> {
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                ElevatedButton(
+                ElevatedButton.icon(
+                  icon: Icon(
+                    Icons.kitchen,
+                    color: pColor,
+                    size: 32,
+                  ),
                   style: ElevatedButton.styleFrom(
                     primary: sColor,
-                    padding: EdgeInsets.fromLTRB(105, 20, 105, 20),
+                    padding: EdgeInsets.fromLTRB(70, 20, 70, 20),
                     shape: StadiumBorder(),
                   ),
-                  child: Text(
+                  label: Text(
                     'ห้องครัว',
                     style: TextStyle(
-                      fontSize: 42,
+                      fontSize: 34,
                       fontWeight: FontWeight.bold,
                       color: pColor,
                     ),
