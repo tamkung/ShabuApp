@@ -104,22 +104,22 @@ List<MenuRecom> getMenuRecomList() {
     MenuRecom(
       "ชุดเปิด",
       174,
-      "asset/image/recom1.jpg",
+      "asset/image/water.jpg",
     ),
     MenuRecom(
       "Avis",
       126,
-      "asset/image/logo.png",
+      "asset/image/water1.jpg",
     ),
     MenuRecom(
       "Avis",
       126,
-      "asset/image/logo.png",
+      "asset/image/water2.jpg",
     ),
     MenuRecom(
       "Avis",
       126,
-      "asset/image/logo.png",
+      "asset/image/water3.jpg",
     ),
     MenuRecom(
       "Avis",
