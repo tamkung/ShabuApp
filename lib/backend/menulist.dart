@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shabu_app/model/data.dart';
 
-Widget buildDealer(Recom dealer, int index) {
+Widget buildMenu(MenuR recome, int index) {
   return Container(
     decoration: BoxDecoration(
       color: Colors.white,
@@ -18,7 +18,7 @@ Widget buildDealer(Recom dealer, int index) {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(dealer.image),
+              image: AssetImage(recome.image),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.all(
@@ -32,7 +32,7 @@ Widget buildDealer(Recom dealer, int index) {
           height: 16,
         ),
         Text(
-          dealer.name,
+          recome.name,
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,

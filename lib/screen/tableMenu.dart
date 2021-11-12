@@ -1,8 +1,11 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:shabu_app/backend/menuRecom.dart';
 import 'package:shabu_app/config/constant.dart';
+import 'package:shabu_app/model/data.dart';
 import 'package:shabu_app/screen/order.dart';
+import 'package:shabu_app/backend/recommend.dart';
 
 class TableMenu extends StatefulWidget {
   final String tableName;
@@ -13,6 +16,7 @@ class TableMenu extends StatefulWidget {
 }
 
 class _TableMenuState extends State<TableMenu> {
+  List<MenuRecom> menuRecom = getMenuRecomList();
   //ประกาศตัวแปรอ้างอิงไปยัง Child ที่ต้องการ
   final dbfirebase = FirebaseDatabase.instance.reference().child('Food');
   //Function สำหรับแก้ไขข้อมูล
@@ -106,6 +110,7 @@ class _TableMenuState extends State<TableMenu> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Flexible(
       child: Scaffold(
         appBar: AppBar(
@@ -127,6 +132,38 @@ class _TableMenuState extends State<TableMenu> {
           ),
           child: Column(
             children: [
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "เมนูแนะนำ",
+                          //textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[200],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 250,
+                    child: ListView(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      children: buildMenuRecoms(),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: size.height * 0.01,
+              ),
               Expanded(
                 flex: 12,
                 child: FirebaseAnimatedList(
@@ -191,6 +228,9 @@ class _TableMenuState extends State<TableMenu> {
                   },
                 ),
               ),
+              SizedBox(
+                height: size.height * 0.005,
+              ),
               Expanded(
                 flex: 1,
                 child: Row(
@@ -217,11 +257,22 @@ class _TableMenuState extends State<TableMenu> {
                   ],
                 ),
               ),
+              SizedBox(
+                height: size.height * 0.005,
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  List<Widget> buildMenuRecoms() {
+    List<Widget> list = [];
+    for (var i = 0; i < menuRecom.length; i++) {
+      list.add(buildMenuRecom(menuRecom[i], i));
+    }
+    return list;
   }
 
   Future _order(String tableName) async {

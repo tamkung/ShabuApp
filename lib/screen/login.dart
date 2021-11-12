@@ -58,8 +58,10 @@ class _LoginState extends State<Login> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
-                  height: size.height * 0.01,
+                Image.asset(
+                  "asset/image/logo.png",
+                  width: size.width * 0.42,
+                  //height: size.height * 0.4,
                 ),
                 Container(
                   width: size.width * 0.9,
@@ -193,7 +195,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 SizedBox(
-                  height: size.height * 0.05,
+                  height: size.height * 0.15,
                 ),
               ],
             ),

@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shabu_app/config/constant.dart';
+import 'package:shabu_app/model/data.dart';
+import 'package:shabu_app/backend/menulist.dart';
+import 'package:shabu_app/backend/recommend.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -10,6 +13,7 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
+  List<MenuR> menu = getMenuList();
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
     print('True');
@@ -54,7 +58,7 @@ class _MainMenuState extends State<MainMenu> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: size.height * 0.05,
+                  height: size.height * 0.03,
                   width: size.width,
                 ),
                 Image.asset(
@@ -62,8 +66,37 @@ class _MainMenuState extends State<MainMenu> {
                   width: size.width * 0.35,
                   //height: size.height * 0.4,
                 ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "เมนูแนะนำ",
+                            //textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[200],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 380,
+                      child: ListView(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: buildMenus(),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(
-                  height: size.height * 0.43,
+                  height: size.height * 0.08,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -173,5 +206,13 @@ class _MainMenuState extends State<MainMenu> {
         ),
       ),
     );
+  }
+
+  List<Widget> buildMenus() {
+    List<Widget> list = [];
+    for (var i = 0; i < menu.length; i++) {
+      list.add(buildMenu(menu[i], i));
+    }
+    return list;
   }
 }

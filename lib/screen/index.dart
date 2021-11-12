@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shabu_app/config/constant.dart';
 import 'package:shabu_app/model/data.dart';
-import 'package:shabu_app/screen/recommend.dart';
+import 'package:shabu_app/backend/recommend.dart';
 
 class Index extends StatelessWidget {
   //const Index({Key? key}) : super(key: key);
-  List<Recom> dealers = getDealerList();
+  List<Recom> recom = getRecomList();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -51,26 +51,6 @@ class Index extends StatelessWidget {
                               color: Colors.grey[200],
                             ),
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                "view all",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: pColor,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                size: 12,
-                                color: pColor,
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ),
@@ -79,7 +59,7 @@ class Index extends StatelessWidget {
                       child: ListView(
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        children: buildDealers(),
+                        children: buildRecoms(),
                       ),
                     ),
                   ],
@@ -139,10 +119,10 @@ class Index extends StatelessWidget {
     );
   }
 
-  List<Widget> buildDealers() {
+  List<Widget> buildRecoms() {
     List<Widget> list = [];
-    for (var i = 0; i < dealers.length; i++) {
-      list.add(buildDealer(dealers[i], i));
+    for (var i = 0; i < recom.length; i++) {
+      list.add(buildRecom(recom[i], i));
     }
     return list;
   }
