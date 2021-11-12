@@ -66,6 +66,7 @@ class _PackageImageState extends State<PackageImage> {
   Future<void> openCamera() async {
     PickedFile? pickedImage;
     try {
+      // ignore: deprecated_member_use
       pickedImage = await picker.getImage(source: ImageSource.camera);
 
       fileName = path.basename(pickedImage!.path);

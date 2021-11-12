@@ -3,6 +3,7 @@ import 'package:shabu_app/config/constant.dart';
 import 'package:shabu_app/model/data.dart';
 import 'package:shabu_app/backend/recommend.dart';
 
+// ignore: must_be_immutable
 class Index extends StatelessWidget {
   //const Index({Key? key}) : super(key: key);
   List<Recom> recom = getRecomList();
