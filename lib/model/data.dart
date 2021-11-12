@@ -64,29 +64,29 @@ class Recom {
 List<Recom> getRecomList() {
   return <Recom>[
     Recom(
-      "ชุดเปิด",
+      "ราคาโปรโมชั่น",
       174,
-      "asset/image/recom1.jpg",
+      "asset/image/price.jpg",
     ),
     Recom(
-      "Avis",
+      "199-.",
       126,
-      "asset/image/recom1.jpg",
+      "asset/image/price2.jpg",
     ),
     Recom(
-      "Avis",
+      "ติดตามโปรโมชั่น",
       126,
-      "asset/image/recom1.jpg",
+      "asset/image/promo.jpg",
     ),
     Recom(
-      "Avis",
+      "สมัครสมาชิก",
       126,
-      "asset/image/recom1.jpg",
+      "asset/image/pro2.jpg",
     ),
     Recom(
-      "Avis",
+      "รับฟรีน้ำดื่ม",
       126,
-      "asset/image/recom1.jpg",
+      "asset/image/pro3.jpg",
     ),
   ];
 }
@@ -104,7 +104,7 @@ List<MenuRecom> getMenuRecomList() {
     MenuRecom(
       "ชุดเปิด",
       174,
-      "asset/image/logo.png",
+      "asset/image/recom1.jpg",
     ),
     MenuRecom(
       "Avis",

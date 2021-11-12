@@ -44,7 +44,7 @@ class Index extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "เมนูแนะนำ",
+                            "โปรโมชั่น",
                             //textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 36,
@@ -56,7 +56,7 @@ class Index extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 380,
+                      height: 490,
                       child: ListView(
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
@@ -66,7 +66,7 @@ class Index extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: size.height * 0.1,
+                  height: size.height * 0.05,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
