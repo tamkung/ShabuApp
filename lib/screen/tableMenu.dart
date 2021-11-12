@@ -5,7 +5,6 @@ import 'package:shabu_app/backend/menuRecom.dart';
 import 'package:shabu_app/config/constant.dart';
 import 'package:shabu_app/model/data.dart';
 import 'package:shabu_app/screen/order.dart';
-import 'package:shabu_app/backend/recommend.dart';
 
 class TableMenu extends StatefulWidget {
   final String tableName;

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:shabu_app/config/constant.dart';
 import 'package:shabu_app/model/data.dart';
 import 'package:shabu_app/backend/menulist.dart';
-import 'package:shabu_app/backend/recommend.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);

@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:shabu_app/config/constant.dart';
 import 'package:shabu_app/screen/comfirmOrder.dart';
 
 class Kitchen extends StatefulWidget {

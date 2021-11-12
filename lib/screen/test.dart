@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
     final picker = ImagePicker();
     PickedFile? pickedImage;
     try {
+      // ignore: deprecated_member_use
       pickedImage = await picker.getImage(
           source: inputSource == 'camera'
               ? ImageSource.camera

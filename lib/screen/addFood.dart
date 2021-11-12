@@ -37,6 +37,7 @@ class _AddFoodState extends State<AddFood> {
   Future<void> _upload(String inputSource) async {
     PickedFile? pickedImage;
     try {
+      // ignore: deprecated_member_use
       pickedImage = await picker.getImage(
           source: inputSource == 'camera'
               ? ImageSource.camera
@@ -94,6 +95,7 @@ class _AddFoodState extends State<AddFood> {
     }
   }
 
+/*
   Future<List<Map<String, dynamic>>> _loadImages() async {
     List<Map<String, dynamic>> files = [];
 
@@ -121,7 +123,7 @@ class _AddFoodState extends State<AddFood> {
     // Rebuild the UI
     setState(() {});
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
