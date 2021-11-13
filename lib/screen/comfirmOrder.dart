@@ -48,7 +48,7 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            widget.tableName,
+            "รายการ " + '(${widget.tableName})',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,

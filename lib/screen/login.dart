@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shabu_app/config/constant.dart';
 import 'package:shabu_app/screen/menu.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -25,7 +26,16 @@ class _LoginState extends State<Login> {
         Navigator.of(context).pushAndRemoveUntil(
             materialPageRoute, (Route<dynamic> route) => false);
       }).catchError((onError) {
-        print(onError);
+        print("Error : " + onError.toString());
+        if (onError.toString() ==
+            "[firebase_auth/unknown] Given String is empty or null") {
+          print("true");
+        } else {
+          _onBasicAlertPressed(context);
+          final snackBar =
+              SnackBar(content: Text('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
       });
     } catch (e) {}
   }
@@ -78,7 +88,7 @@ class _LoginState extends State<Login> {
                 ),*/
                 Container(
                   width: size.width * 0.9,
-                  height: size.height * 0.12,
+                  //height: size.height * 0.12,
                   // color: Colors.black87,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -91,21 +101,32 @@ class _LoginState extends State<Login> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      SizedBox(
+                        width: size.width * 0.04,
+                      ),
                       Container(
-                        color: sColor,
                         width: size.width * 0.55,
                         child: TextFormField(
-                          style: TextStyle(
-                            color: pColor,
-                            fontSize: 30,
-                          ),
+                          style: TextStyle(fontSize: 28, color: Colors.white),
+                          keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             hintText: "Email",
-                            hoverColor: pColor,
+                            hintStyle: TextStyle(color: Colors.grey.shade700),
+                            filled: true,
+                            fillColor: Color(0xff161d27).withOpacity(0.9),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide(color: sColor)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide(color: sColor)),
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'กรุณาป้อนอีเมล';
+                              final snackBar =
+                                  SnackBar(content: Text('กรุณาป้อนอีเมล'));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
                             }
                           },
                           onSaved: (value) {
@@ -116,10 +137,13 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: size.height * 0.05,
+                ),
                 Container(
                   width: size.width * 0.9,
-                  height: size.height * 0.12,
-                  //      color: Colors.black87,
+                  //height: size.height * 0.10,
+                  //color: Colors.black87,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -131,21 +155,32 @@ class _LoginState extends State<Login> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      SizedBox(
+                        width: size.width * 0.03,
+                      ),
                       Container(
-                        color: sColor,
                         width: size.width * 0.55,
                         child: TextFormField(
-                          style: TextStyle(
-                            color: pColor,
-                            fontSize: 30,
-                          ),
-                          obscureText: true,
+                          style: TextStyle(fontSize: 28, color: Colors.white),
                           decoration: InputDecoration(
                             hintText: "Password",
+                            hintStyle: TextStyle(color: Colors.grey.shade700),
+                            filled: true,
+                            fillColor: Color(0xff161d27).withOpacity(0.9),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide(color: sColor)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide(color: sColor)),
                           ),
+                          obscureText: true,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'กรุณาป้อนรหัสผ่าน';
+                              final snackBar =
+                                  SnackBar(content: Text('กรุณาป้อนรหัสผ่าน'));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
                             }
                           },
                           onSaved: (value) {
@@ -165,14 +200,19 @@ class _LoginState extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        child: ElevatedButton(
+                        child: ElevatedButton.icon(
+                          icon: Icon(
+                            Icons.login,
+                            color: pColor,
+                            size: 32,
+                          ),
                           style: ElevatedButton.styleFrom(
                             primary: sColor,
                             padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
                             shape: StadiumBorder(),
                           ),
-                          child: Text(
-                            'ยืนยัน',
+                          label: Text(
+                            'เข้าสู่ระบบ',
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -203,5 +243,31 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  _onBasicAlertPressed(context) {
+    Alert(
+      style: AlertStyle(
+        backgroundColor: sColor,
+        titleStyle: TextStyle(fontSize: 32),
+      ),
+      buttons: [
+        DialogButton(
+          child: Text(
+            "OK",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+          color: pColor,
+          onPressed: () => Navigator.pop(context),
+          width: 120,
+        ),
+      ],
+      context: context,
+      title: "ไม่พบข้อมูล",
+      //desc: "Flutter is more awesome with RFlutter Alert.",
+    ).show();
   }
 }
