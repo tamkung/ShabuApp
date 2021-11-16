@@ -18,8 +18,10 @@ class _MainMenuState extends State<MainMenu> {
     print('True');
   }
 
+  var ct;
   @override
   Widget build(BuildContext context) {
+    ct = context;
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -174,7 +176,7 @@ class _MainMenuState extends State<MainMenu> {
                   },
                 ),*/
                 SizedBox(
-                  height: size.height * 0.03,
+                  height: size.height * 0.02,
                 ),
                 ElevatedButton.icon(
                   icon: Icon(
@@ -210,7 +212,7 @@ class _MainMenuState extends State<MainMenu> {
   List<Widget> buildMenus() {
     List<Widget> list = [];
     for (var i = 0; i < menu.length; i++) {
-      list.add(buildMenu(menu[i], i));
+      list.add(buildMenu(menu[i], i, ct));
     }
     return list;
   }

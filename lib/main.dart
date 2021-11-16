@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shabu_app/screen/addFood.dart';
+import 'package:shabu_app/screen/backup/singingoogle.dart';
 import 'package:shabu_app/screen/food.dart';
 import 'package:shabu_app/screen/index.dart';
 import 'package:shabu_app/screen/kitchen.dart';
 import 'package:shabu_app/screen/login.dart';
 import 'package:shabu_app/screen/menu.dart';
 import 'package:shabu_app/screen/table.dart';
-
 import 'config/constant.dart';
 
 Future<void> main() async {
@@ -34,10 +35,15 @@ class MyApp extends StatelessWidget {
         //'Test': (context) => HomePage(),
         //'AllTable': (context) => AllTable(),
         //'TableMenu': (context) => TableMenu(),
+        'SignInG': (context) => SignInDemo(),
       },
       theme: ThemeData(
         primaryColor: pColor,
         secondaryHeaderColor: sColor,
+        textTheme: GoogleFonts.kanitTextTheme(
+          Theme.of(context)
+              .textTheme, // ถ้าไม่ใส่ มันจะตั้งค่า Default ทุกอย่างตาม ThemeData.light().textTheme
+        ),
       ),
     );
   }

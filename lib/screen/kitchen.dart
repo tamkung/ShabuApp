@@ -55,7 +55,7 @@ class _KitchenState extends State<Kitchen> {
                   query: dbfirebase,
                   itemBuilder: (context, snapshot, animation, index) {
                     return Container(
-                      height: 100,
+                      height: 80,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                         child: Card(
@@ -65,9 +65,10 @@ class _KitchenState extends State<Kitchen> {
                             onTap: () {
                               confirmO(snapshot.key.toString());
                             },
-                            leading: CircleAvatar(child: Icon(Icons.food_bank)
-                                //backgroundColor: pColor,
-                                ),
+                            leading: CircleAvatar(
+                              child: Icon(Icons.food_bank),
+                              //backgroundColor: pColor,
+                            ),
                             title: Text(
                               '${snapshot.key}',
                               style: TextStyle(fontSize: 20),

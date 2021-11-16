@@ -87,148 +87,174 @@ class _LoginState extends State<Login> {
                   ),
                 ),*/
                 Container(
-                  width: size.width * 0.9,
-                  //height: size.height * 0.12,
-                  // color: Colors.black87,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'ชื่อผู้ใช้ : ',
-                        style: TextStyle(
-                          fontSize: 38,
-                          color: sColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(
-                        width: size.width * 0.04,
-                      ),
-                      Container(
-                        width: size.width * 0.55,
-                        child: TextFormField(
-                          style: TextStyle(fontSize: 28, color: Colors.white),
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            hintText: "Email",
-                            hintStyle: TextStyle(color: Colors.grey.shade700),
-                            filled: true,
-                            fillColor: Color(0xff161d27).withOpacity(0.9),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide(color: sColor)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide(color: sColor)),
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              final snackBar =
-                                  SnackBar(content: Text('กรุณาป้อนอีเมล'));
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            }
-                          },
-                          onSaved: (value) {
-                            email = value!.trim();
-                          },
-                        ),
-                      ),
-                    ],
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.white.withOpacity(0.8),
                   ),
-                ),
-                SizedBox(
-                  height: size.height * 0.05,
-                ),
-                Container(
-                  width: size.width * 0.9,
-                  //height: size.height * 0.10,
-                  //color: Colors.black87,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  //color: pColor,
+                  child: Column(
                     children: [
-                      Text(
-                        'รหัสผ่าน : ',
-                        style: TextStyle(
-                          fontSize: 38,
-                          color: sColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
                       SizedBox(
-                        width: size.width * 0.03,
+                        height: size.height * 0.04,
                       ),
                       Container(
-                        width: size.width * 0.55,
-                        child: TextFormField(
-                          style: TextStyle(fontSize: 28, color: Colors.white),
-                          decoration: InputDecoration(
-                            hintText: "Password",
-                            hintStyle: TextStyle(color: Colors.grey.shade700),
-                            filled: true,
-                            fillColor: Color(0xff161d27).withOpacity(0.9),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide(color: sColor)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide(color: sColor)),
-                          ),
-                          obscureText: true,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              final snackBar =
-                                  SnackBar(content: Text('กรุณาป้อนรหัสผ่าน'));
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            }
-                          },
-                          onSaved: (value) {
-                            password = value!.trim();
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: size.width * 0.9,
-                  height: size.height * 0.12,
-                  //  color: Colors.black87,
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: ElevatedButton.icon(
-                          icon: Icon(
-                            Icons.login,
-                            color: pColor,
-                            size: 32,
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: sColor,
-                            padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-                            shape: StadiumBorder(),
-                          ),
-                          label: Text(
-                            'เข้าสู่ระบบ',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: pColor,
+                        width: size.width * 0.9,
+                        //height: size.height * 0.12,
+                        // color: Colors.black87,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'ชื่อผู้ใช้ : ',
+                              style: TextStyle(
+                                fontSize: 38,
+                                color: pColor,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              formKey.currentState!.save();
-                              checkUser();
-                            }
-                            print(email);
-                            print(password);
+                            SizedBox(
+                              width: size.width * 0.04,
+                            ),
+                            Container(
+                              width: size.width * 0.55,
+                              child: TextFormField(
+                                style: TextStyle(
+                                    fontSize: 28, color: Colors.white),
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  hintText: "Email",
+                                  hintStyle:
+                                      TextStyle(color: Colors.grey.shade700),
+                                  filled: true,
+                                  fillColor: Color(0xff161d27).withOpacity(0.9),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                      borderSide: BorderSide(color: sColor)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                      borderSide: BorderSide(color: sColor)),
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    final snackBar = SnackBar(
+                                        content: Text('กรุณาป้อนอีเมล'));
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
+                                onSaved: (value) {
+                                  email = value!.trim();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * 0.05,
+                      ),
+                      Container(
+                        width: size.width * 0.9,
+                        //height: size.height * 0.10,
+                        //color: Colors.black87,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'รหัสผ่าน : ',
+                              style: TextStyle(
+                                fontSize: 38,
+                                color: pColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              width: size.width * 0.01,
+                            ),
+                            Container(
+                              width: size.width * 0.55,
+                              child: TextFormField(
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  color: Colors.white,
+                                ),
+                                decoration: InputDecoration(
+                                  hintText: "Password",
+                                  hintStyle:
+                                      TextStyle(color: Colors.grey.shade700),
+                                  filled: true,
+                                  fillColor: Color(0xff161d27).withOpacity(0.9),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                      borderSide: BorderSide(color: sColor)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                      borderSide: BorderSide(color: sColor)),
+                                ),
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    final snackBar = SnackBar(
+                                        content: Text('กรุณาป้อนรหัสผ่าน'));
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
+                                onSaved: (value) {
+                                  password = value!.trim();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * 0.03,
+                      ),
+                      Container(
+                        width: size.width * 0.9,
+                        height: size.height * 0.12,
+                        //  color: Colors.black87,
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: ElevatedButton.icon(
+                                icon: Icon(
+                                  Icons.login,
+                                  color: pColor,
+                                  size: 32,
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: sColor,
+                                  padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+                                  shape: StadiumBorder(),
+                                  side: BorderSide(
+                                    color: pColor,
+                                  ),
+                                ),
+                                label: Text(
+                                  'เข้าสู่ระบบ',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: pColor,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  if (formKey.currentState!.validate()) {
+                                    formKey.currentState!.save();
+                                    checkUser();
+                                  }
+                                  print(email);
+                                  print(password);
 
-                            //  Navigator.pushNamed(context, 'MainMenu');
-                          },
+                                  //  Navigator.pushNamed(context, 'MainMenu');
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

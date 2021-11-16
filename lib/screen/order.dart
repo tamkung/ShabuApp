@@ -71,7 +71,7 @@ class _OrderState extends State<Order> {
                   query: dbfirebase,
                   itemBuilder: (context, snapshot, animation, index) {
                     return Container(
-                      height: 100,
+                      height: 80,
                       //color: Colors.white,
                       //alignment: Alignment.center,
                       child: Padding(

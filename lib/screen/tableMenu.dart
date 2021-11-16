@@ -171,56 +171,52 @@ class _TableMenuState extends State<TableMenu> {
                     return Container(
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                        child: Column(
-                          children: [
-                            Card(
-                              margin: EdgeInsets.all(5),
-                              elevation: 5,
-                              child: ListTile(
-                                leading: CircleAvatar(
-                                  radius: 29,
-                                  backgroundImage: NetworkImage(
-                                      '${snapshot.value['imgURL']}'),
-                                  //backgroundColor: pColor,
-                                ),
-                                title: Text(
-                                  '${snapshot.value['tName']}',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                //subtitle: Text('เมนู : ' + '${snapshot.value['tName']}'),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      'จำนวน',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        updateData(snapshot.key!,
-                                            snapshot.value['amonth'], "sub");
-                                      },
-                                      icon: Icon(Icons.do_disturb_on),
-                                    ),
-                                    Text(snapshot.value['amonth'].toString()),
-                                    IconButton(
-                                      onPressed: () {
-                                        updateData(snapshot.key!,
-                                            snapshot.value['amonth'], "add");
-                                      },
-                                      icon: Icon(Icons.add_circle),
-                                    ),
-                                  ],
-                                ),
+                        child: Card(
+                          margin: EdgeInsets.all(5),
+                          elevation: 5,
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              radius: 29,
+                              backgroundImage:
+                                  NetworkImage('${snapshot.value['imgURL']}'),
+                              //backgroundColor: pColor,
+                            ),
+                            title: Text(
+                              '${snapshot.value['tName']}',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ],
+                            //subtitle: Text('เมนู : ' + '${snapshot.value['tName']}'),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'จำนวน',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    updateData(snapshot.key!,
+                                        snapshot.value['amonth'], "sub");
+                                  },
+                                  icon: Icon(Icons.do_disturb_on),
+                                ),
+                                Text(snapshot.value['amonth'].toString()),
+                                IconButton(
+                                  onPressed: () {
+                                    updateData(snapshot.key!,
+                                        snapshot.value['amonth'], "add");
+                                  },
+                                  icon: Icon(Icons.add_circle),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     );

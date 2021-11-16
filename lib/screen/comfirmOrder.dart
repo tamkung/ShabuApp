@@ -71,13 +71,14 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
                   query: dbfirebase,
                   itemBuilder: (context, snapshot, animation, index) {
                     return Container(
-                      height: 100,
+                      height: 80,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                         child: Card(
                           elevation: 5,
                           child: ListTile(
                             leading: CircleAvatar(
+                              radius: 29,
                               backgroundImage:
                                   NetworkImage('${snapshot.value['imgURL']}'),
                               //backgroundColor: pColor,

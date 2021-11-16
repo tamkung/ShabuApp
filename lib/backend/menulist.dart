@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shabu_app/config/constant.dart';
 import 'package:shabu_app/model/data.dart';
 
-Widget buildMenu(MenuR recome, int index) {
+Widget buildMenu(MenuR recome, int index, dynamic context) {
   return Container(
     decoration: BoxDecoration(
       color: Colors.white,
@@ -15,18 +17,21 @@ Widget buildMenu(MenuR recome, int index) {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(recome.image),
-              fit: BoxFit.cover,
+        GestureDetector(
+          onTap: () => _onBasicAlertPressed(context, recome.image),
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(recome.image),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(15),
+              ),
             ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(15),
-            ),
+            height: 750,
+            width: 600,
           ),
-          height: 750,
-          width: 600,
         ),
         SizedBox(
           height: 16,
@@ -50,4 +55,30 @@ Widget buildMenu(MenuR recome, int index) {
       ],
     ),
   );
+}
+
+_onBasicAlertPressed(context, dynamic img) {
+  Alert(
+    style: AlertStyle(
+      backgroundColor: sColor,
+      titleStyle: TextStyle(fontSize: 32),
+    ),
+    image: Image.asset(img),
+    context: context,
+    buttons: [
+      DialogButton(
+        child: Text(
+          "OK",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
+        ),
+        color: pColor,
+        onPressed: () => Navigator.pop(context),
+        width: 120,
+      ),
+    ],
+    //desc: "Flutter is more awesome with RFlutter Alert.",
+  ).show();
 }

@@ -5,10 +5,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shabu_app/config/constant.dart';
+import 'package:shabu_app/model/data.dart';
 
 class EditFood extends StatefulWidget {
-  final dynamic foodKey;
-  const EditFood({required this.foodKey}) : super();
+  final dynamic foodKey, readName, readURL;
+  const EditFood({required this.foodKey, this.readName, this.readURL})
+      : super();
 
   @override
   _EditFoodState createState() => _EditFoodState();
@@ -55,27 +57,11 @@ class _EditFoodState extends State<EditFood> {
     }
   }
 
-  Future<void> updateData(String key) async {
-    try {
-      dbfirebase
-          .child(key)
-          .update({
-            'status': "ขายแล้ว",
-          })
-          .then((value) => print('Success'))
-          .catchError((onError) {
-            print(onError.code);
-            print(onError.message);
-          });
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> createData() async {
+  Future<void> updateData() async {
+    FirebaseStorage.instance.refFromURL(widget.readURL).delete();
     try {
       TaskSnapshot snapshot =
-          await storage.ref().child("Image/$fileName").putFile(file);
+          await storage.ref().child("Image/$name").putFile(file);
       if (snapshot.state == TaskState.success) {
         final String downloadUrl = await snapshot.ref.getDownloadURL();
         await dbfirebase.child(widget.foodKey).update({
@@ -93,7 +79,7 @@ class _EditFoodState extends State<EditFood> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         print(fileName);
         print(imageFile);
-        print(downloadUrl);
+        print("URL" + downloadUrl.toString());
         //setState(() {});
       } else {
         print('Error from image repo ${snapshot.state.toString()}');
@@ -104,6 +90,27 @@ class _EditFoodState extends State<EditFood> {
     }
   }
 
+  Future<void> updateData2() async {
+    await dbfirebase.child(widget.foodKey).update({
+      'tName': name,
+      'imgURL': widget.readURL,
+      'amonth': 0,
+    }).then((value) {
+      print("Success2");
+      Navigator.of(context).pop();
+    }).catchError((onError) {
+      print(onError.code);
+      print(onError.message);
+    });
+    final snackBar = SnackBar(content: Text('แก้ไขสำเร็จ'));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    print(fileName);
+    print(imageFile);
+    print(file);
+    //setState(() {});
+  }
+
+/*
   var img, nameE;
   Future loadData() async {
     await dbfirebase.child(widget.foodKey).once().then((DataSnapshot snapshot) {
@@ -112,91 +119,91 @@ class _EditFoodState extends State<EditFood> {
       img = snapshot.value['imgURL'];
     });
   }
-
+*/
   @override
-  Widget build(BuildContext context) => FutureBuilder(
-        future: loadData(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                "เพิ่มเมนูอาหาร",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              centerTitle: true,
-            ),
-            body: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("asset/image/bg1.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Form(
-                key: formKey,
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "เพิ่มเมนูอาหาร",
+          style: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("asset/image/bg1.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Form(
+          key: formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.white,
                   child: Column(
                     children: [
-                      Container(
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                ElevatedButton.icon(
-                                  onPressed: () => _upload('camera'),
-                                  icon: Icon(Icons.camera),
-                                  label: Text('camera'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: pColor,
-                                  ),
-                                ),
-                                ElevatedButton.icon(
-                                  onPressed: () => _upload('gallery'),
-                                  icon: Icon(Icons.library_add),
-                                  label: Text('Gallery'),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: pColor,
-                                  ),
-                                ),
-                              ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ElevatedButton.icon(
+                            onPressed: () => _upload('camera'),
+                            icon: Icon(Icons.camera),
+                            label: Text('Camera'),
+                            style: ElevatedButton.styleFrom(
+                              primary: pColor,
                             ),
-                            txtName(),
-                            Center(
-                              child: file == null
-                                  ? CircleAvatar(
-                                      radius: 100,
-                                      backgroundImage: NetworkImage('$img'),
-                                      //backgroundColor: pColor,
-                                    )
-                                  : Image.file(
-                                      file,
-                                      scale: 5,
-                                    ),
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: () => _upload('gallery'),
+                            icon: Icon(Icons.library_add),
+                            label: Text('Gallery'),
+                            style: ElevatedButton.styleFrom(
+                              primary: pColor,
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            btnSubmit(),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
+                      txtName(),
+                      Center(
+                        child: file == null
+                            ? CircleAvatar(
+                                radius: 100,
+                                backgroundImage: NetworkImage(widget.readURL!),
+                                //backgroundColor: pColor,
+                              )
+                            : CircleAvatar(
+                                radius: 100,
+                                backgroundImage: Image.file(
+                                  file,
+                                  fit: BoxFit.cover,
+                                ).image,
+                              ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      btnSubmit(),
+                      SizedBox(
+                        height: 10,
                       ),
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
-          );
-        },
-      );
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget txtName() {
     //loadData();
@@ -209,9 +216,9 @@ class _EditFoodState extends State<EditFood> {
         decoration: InputDecoration(
           labelText: 'ชื่อเมนู :',
           icon: Icon(Icons.food_bank),
-          hintText: '$nameE',
+          hintText: widget.readName,
         ),
-        //initialValue: '$nameE',
+        initialValue: widget.readName,
         validator: (value) {
           if (value!.isEmpty) {
             return 'กรุณาป้อนข้อมูล';
@@ -231,11 +238,11 @@ class _EditFoodState extends State<EditFood> {
         onPressed: () {
           if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
-            createData();
+            file == null ? updateData2() : updateData();
             formKey.currentState!.reset();
             file = null;
           }
-          print(nameE);
+          //print(nameE);
         },
         child: Text(
           'แก้ไข',

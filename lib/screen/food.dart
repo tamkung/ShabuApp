@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:shabu_app/screen/editFood.dart';
 
@@ -14,21 +15,22 @@ class _FoodState extends State<Food> {
   //ประกาศตัวแปรอ้างอิงไปยัง Child ที่ต้องการ
   final dbfirebase = FirebaseDatabase.instance.reference().child('Food');
   //Function สำหรับแก้ไขข้อมูล
-  Future<void> updateData(String key) async {
-    try {
-      dbfirebase
-          .child(key)
-          .update({
-            'status': "ขายแล้ว",
-          })
-          .then((value) => print('Success'))
-          .catchError((onError) {
-            print(onError.code);
-            print(onError.message);
-          });
-    } catch (e) {
-      print(e);
-    }
+
+  /*
+  var img, nameE;
+  Future loadData() async {
+    await dbfirebase.once().then((DataSnapshot snapshot) {
+      print('Data1 : ${snapshot.key}');
+      print('Data2 : ${snapshot.value["tName"]}');
+      print('Data3 : ${snapshot.value['imgURL']}');
+      nameE = snapshot.value['tName'];
+      img = snapshot.value['imgURL'];
+    });
+  }
+*/
+
+  Future<void> _delete(String ref) async {
+    await FirebaseStorage.instance.refFromURL(ref).delete();
   }
 
   @override
@@ -43,6 +45,10 @@ class _FoodState extends State<Food> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          /*
+          actions: [
+            IconButton(onPressed: () => loadData(), icon: Icon(Icons.ac_unit))
+          ],*/
           centerTitle: true,
         ),
         body: Container(
@@ -84,7 +90,11 @@ class _FoodState extends State<Food> {
                           IconButton(
                             icon: Icon(Icons.edit),
                             onPressed: () {
-                              _edit(snapshot.key);
+                              _edit(
+                                snapshot.key,
+                                '${snapshot.value['tName']}',
+                                '${snapshot.value['imgURL']}',
+                              );
                               //print(snapshot.key);
                             },
                           ),
@@ -94,7 +104,10 @@ class _FoodState extends State<Food> {
                               color: Colors.red,
                             ),
                             onPressed: () {
-                              _showMyDialog(snapshot.key);
+                              _showMyDialog(
+                                snapshot.key,
+                                '${snapshot.value['imgURL']}',
+                              );
                               //dbfirebase.child(snapshot.key!).remove();
                             },
                           ),
@@ -111,7 +124,7 @@ class _FoodState extends State<Food> {
     );
   }
 
-  Future<void> _showMyDialog(var key) async {
+  Future<void> _showMyDialog(var key, imgurl) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -147,6 +160,7 @@ class _FoodState extends State<Food> {
               ),
               onPressed: () {
                 print('Confirmed');
+                _delete(imgurl);
                 dbfirebase.child(key).remove();
                 //print(key);
                 Navigator.of(context).pop();
@@ -170,12 +184,14 @@ class _FoodState extends State<Food> {
     );
   }
 
-  Future _edit(dynamic foodKey) async {
+  Future _edit(dynamic foodKey, sendName, sendURL) async {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => EditFood(
           foodKey: foodKey,
+          readName: sendName,
+          readURL: sendURL,
         ),
       ),
     );

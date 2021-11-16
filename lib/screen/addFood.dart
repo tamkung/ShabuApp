@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as path;
 import 'package:image_picker/image_picker.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shabu_app/config/constant.dart';
 
 class AddFood extends StatefulWidget {
@@ -54,8 +55,9 @@ class _AddFoodState extends State<AddFood> {
   }
 
   Future<void> createData() async {
-    try {
-      /*
+    if (file != null) {
+      try {
+        /*
       await storage.ref('Image').child(fileName!).putFile(
             imageFile!,
             SettableMetadata(
@@ -66,32 +68,37 @@ class _AddFoodState extends State<AddFood> {
             ),
           );
       */
-      TaskSnapshot snapshot =
-          await storage.ref().child("Image/$fileName").putFile(file);
-      if (snapshot.state == TaskState.success) {
-        final String downloadUrl = await snapshot.ref.getDownloadURL();
-        await dbfirebase.push().set({
-          'tName': name,
-          'imgURL': downloadUrl,
-          'amonth': 0,
-        }).then((value) {
-          print("Success");
-        }).catchError((onError) {
-          print(onError.code);
-          print(onError.message);
-        });
-        final snackBar = SnackBar(content: Text('เพิ่มสำเร็จ'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        print(fileName);
-        print(imageFile);
-        print(downloadUrl);
-        setState(() {});
-      } else {
-        print('Error from image repo ${snapshot.state.toString()}');
-        throw ('This file is not an image');
+        TaskSnapshot snapshot =
+            await storage.ref().child("Image/$name").putFile(file);
+        if (snapshot.state == TaskState.success) {
+          final String downloadUrl = await snapshot.ref.getDownloadURL();
+          await dbfirebase.push().set({
+            'tName': name,
+            'imgURL': downloadUrl,
+            'amonth': 0,
+          }).then((value) {
+            formKey.currentState!.reset();
+            file = null;
+            print("Success");
+          }).catchError((onError) {
+            print(onError.code);
+            print(onError.message);
+          });
+          final snackBar = SnackBar(content: Text('เพิ่มสำเร็จ'));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          print(fileName);
+          print(imageFile);
+          print(downloadUrl);
+          setState(() {});
+        } else {
+          print('Error from image repo ${snapshot.state.toString()}');
+          throw ('This file is not an image');
+        }
+      } on FirebaseException catch (error) {
+        print(error);
       }
-    } on FirebaseException catch (error) {
-      print(error);
+    } else {
+      _onBasicAlertPressed(context);
     }
   }
 
@@ -160,7 +167,7 @@ class _AddFoodState extends State<AddFood> {
                           ElevatedButton.icon(
                             onPressed: () => _upload('camera'),
                             icon: Icon(Icons.camera),
-                            label: Text('camera'),
+                            label: Text('Camera'),
                             style: ElevatedButton.styleFrom(
                               primary: pColor,
                             ),
@@ -178,10 +185,13 @@ class _AddFoodState extends State<AddFood> {
                       txtName(),
                       Center(
                         child: file == null
-                            ? Text('Not Found')
-                            : Image.file(
-                                file,
-                                scale: 5,
+                            ? Text('ไม่มีรูปภาพ')
+                            : CircleAvatar(
+                                radius: 100,
+                                backgroundImage: Image.file(
+                                  file,
+                                  fit: BoxFit.cover,
+                                ).image,
                               ),
                       ),
                       btnSubmit(),
@@ -233,6 +243,32 @@ class _AddFoodState extends State<AddFood> {
     );
   }
 
+  _onBasicAlertPressed(context) {
+    Alert(
+      style: AlertStyle(
+        backgroundColor: sColor,
+        titleStyle: TextStyle(fontSize: 32),
+      ),
+      buttons: [
+        DialogButton(
+          child: Text(
+            "OK",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+          color: pColor,
+          onPressed: () => Navigator.pop(context),
+          width: 120,
+        ),
+      ],
+      context: context,
+      title: "กรุณาเพิ่มรูปภาพ",
+      //desc: "Flutter is more awesome with RFlutter Alert.",
+    ).show();
+  }
+
   Widget txtName() {
     return Container(
       margin: EdgeInsets.fromLTRB(10, 15, 15, 10),
@@ -265,8 +301,6 @@ class _AddFoodState extends State<AddFood> {
           if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
             createData();
-            formKey.currentState!.reset();
-            file = null;
           }
         },
         child: Text('เพิ่ม'),
