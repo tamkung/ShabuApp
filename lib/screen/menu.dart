@@ -80,7 +80,7 @@ class _MainMenuState extends State<MainMenu> {
               leading: Icon(
                 Icons.edit,
                 size: 32,
-                color: Colors.red[800],
+                color: Colors.orange[900],
               ),
               title: const Text(
                 'แก้ไขเมนูอาหาร',
@@ -108,6 +108,25 @@ class _MainMenuState extends State<MainMenu> {
               ),
               onTap: () {
                 Navigator.pushNamed(context, 'Kitchen');
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.logout,
+                size: 32,
+                color: Colors.red[800],
+              ),
+              title: const Text(
+                'ออกจากระบบ',
+                style: TextStyle(
+                  color: pColor,
+                  fontSize: 28,
+                ),
+              ),
+              onTap: () {
+                logout();
+                Navigator.of(context).pop();
+                Navigator.pushNamed(context, 'Index', arguments: []);
               },
             ),
           ],

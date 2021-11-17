@@ -51,6 +51,7 @@ class Index extends StatelessWidget {
     ct = context;
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      /*
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -75,9 +76,20 @@ class Index extends StatelessWidget {
                 _launchURLBrowser();
               },
             ),
+            Container(
+              height: 5,
+              color: Colors.black,
+            ),
             ListTile(
               leading: Icon(Icons.login),
               title: const Text('Sing In Google'),
+              onTap: () {
+                Navigator.pushNamed(context, 'SignInG');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.date_range),
+              title: const Text('Date'),
               onTap: () {
                 Navigator.pushNamed(context, 'SignInG');
               },
@@ -91,7 +103,7 @@ class Index extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ),*/
       body: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
