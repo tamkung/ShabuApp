@@ -24,6 +24,95 @@ class _MainMenuState extends State<MainMenu> {
     ct = context;
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: pColor,
+              ),
+              child: Text(
+                'เมนู',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: sColor,
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.home,
+                size: 32,
+                color: Colors.green[600],
+              ),
+              title: const Text(
+                'หน้าหลัก',
+                style: TextStyle(
+                  color: pColor,
+                  fontSize: 28,
+                ),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.add_box,
+                size: 32,
+                color: Colors.yellow[800],
+              ),
+              title: const Text(
+                'เพิ่มเมนูอาหาร',
+                style: TextStyle(
+                  color: pColor,
+                  fontSize: 28,
+                ),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, 'AddFood');
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.edit,
+                size: 32,
+                color: Colors.red[800],
+              ),
+              title: const Text(
+                'แก้ไขเมนูอาหาร',
+                style: TextStyle(
+                  color: pColor,
+                  fontSize: 28,
+                ),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, 'Food');
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.kitchen,
+                size: 32,
+                color: Colors.brown[800],
+              ),
+              title: const Text(
+                'ห้องครัว',
+                style: TextStyle(
+                  color: pColor,
+                  fontSize: 28,
+                ),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, 'Kitchen');
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Text(
           "หน้าหลัก",
@@ -87,7 +176,7 @@ class _MainMenuState extends State<MainMenu> {
                       ),
                     ),
                     Container(
-                      height: 800,
+                      height: 1000,
                       child: ListView(
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
@@ -96,7 +185,7 @@ class _MainMenuState extends State<MainMenu> {
                     ),
                   ],
                 ),
-                SizedBox(
+                /*SizedBox(
                   height: size.height * 0.02,
                 ),
                 Row(
@@ -200,7 +289,7 @@ class _MainMenuState extends State<MainMenu> {
                   onPressed: () {
                     Navigator.pushNamed(context, 'Kitchen');
                   },
-                ),
+                ),*/
               ],
             ),
           ],

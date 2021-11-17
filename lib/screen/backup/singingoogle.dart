@@ -7,6 +7,7 @@
 import 'dart:async';
 import 'dart:convert' show json;
 
+import 'package:firebase_auth/firebase_auth.dart';
 import "package:http/http.dart" as http;
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -29,6 +30,8 @@ class SignInDemo extends StatefulWidget {
 class SignInDemoState extends State<SignInDemo> {
   GoogleSignInAccount? _currentUser;
   String _contactText = '';
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  //final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
@@ -90,6 +93,28 @@ class SignInDemoState extends State<SignInDemo> {
     return null;
   }
 
+  Future<String?> signInwithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount!.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      throw e;
+    }
+  }
+
+  Future<void> signOutFromGoogle() async {
+    await _googleSignIn.signOut();
+    await _auth.signOut();
+  }
+
   Future<void> _handleSignIn() async {
     try {
       await _googleSignIn.signIn();
@@ -132,7 +157,7 @@ class SignInDemoState extends State<SignInDemo> {
           const Text("You are not currently signed in."),
           ElevatedButton(
             child: const Text('SIGN IN'),
-            onPressed: _handleSignIn,
+            onPressed: signInwithGoogle,
           ),
         ],
       );

@@ -13,7 +13,7 @@ Widget buildMenu(MenuR recome, int index, dynamic context) {
     ),
     padding: EdgeInsets.all(16),
     margin: EdgeInsets.only(right: 16, left: index == 0 ? 16 : 0),
-    width: 700,
+    width: 720,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
@@ -29,8 +29,8 @@ Widget buildMenu(MenuR recome, int index, dynamic context) {
                 Radius.circular(15),
               ),
             ),
-            height: 750,
-            width: 600,
+            height: 950,
+            width: 680,
           ),
         ),
         SizedBox(

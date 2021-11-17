@@ -12,11 +12,12 @@ class ETable extends StatefulWidget {
 class _ETableState extends State<ETable> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "สั่งอาหาร",
+          "เลือกโต๊ะ",
           style: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
@@ -33,24 +34,43 @@ class _ETableState extends State<ETable> {
         ),
         child: Column(
           children: [
-            SizedBox(
-              height: 50,
-            ),
+            SizedBox(height: size.height * 0.025),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
-                    //shape: StadiumBorder(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black.withOpacity(0.5),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Color(0xFF8B4513),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    'โต๊ะที่ : 1',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "asset/image/table2.png",
+                          height: 100,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
+                        Text(
+                          'โต๊ะที่ : 1',
+                          style: TextStyle(
+                            fontSize: 42,
+                            color: sColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onPressed: () {
@@ -61,17 +81,38 @@ class _ETableState extends State<ETable> {
                   width: 100,
                 ),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
-                    //shape: StadiumBorder(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black.withOpacity(0.5),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Color(0xFF8B4513),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    'โต๊ะที่ : 2',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "asset/image/table2.png",
+                          height: 100,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
+                        Text(
+                          'โต๊ะที่ : 2',
+                          style: TextStyle(
+                            fontSize: 42,
+                            color: sColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onPressed: () {
@@ -87,17 +128,39 @@ class _ETableState extends State<ETable> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
-                    //shape: StadiumBorder(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black.withOpacity(0.5),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Color(0xFF8B4513),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    'โต๊ะที่ : 3',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "asset/image/table4.png",
+                          height: 100,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
+                        Text(
+                          'โต๊ะที่ : 3',
+                          style: TextStyle(
+                            fontSize: 42,
+                            //fontWeight: FontWeight.bold,
+                            color: sColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onPressed: () {
@@ -108,17 +171,39 @@ class _ETableState extends State<ETable> {
                   width: 100,
                 ),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
-                    //shape: StadiumBorder(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black.withOpacity(0.5),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Color(0xFF8B4513),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    'โต๊ะที่ : 4',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "asset/image/table4.png",
+                          height: 100,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
+                        Text(
+                          'โต๊ะที่ : 4',
+                          style: TextStyle(
+                            fontSize: 42,
+                            //fontWeight: FontWeight.bold,
+                            color: sColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onPressed: () {
@@ -134,17 +219,39 @@ class _ETableState extends State<ETable> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
-                    //shape: StadiumBorder(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black.withOpacity(0.5),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Color(0xFF8B4513),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    'โต๊ะที่ : 5',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "asset/image/table4.png",
+                          height: 100,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
+                        Text(
+                          'โต๊ะที่ : 5',
+                          style: TextStyle(
+                            fontSize: 42,
+                            //fontWeight: FontWeight.bold,
+                            color: sColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onPressed: () {
@@ -155,17 +262,39 @@ class _ETableState extends State<ETable> {
                   width: 100,
                 ),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
-                    //shape: StadiumBorder(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black.withOpacity(0.5),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Color(0xFF8B4513),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    'โต๊ะที่ : 6',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "asset/image/table4.png",
+                          height: 100,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
+                        Text(
+                          'โต๊ะที่ : 6',
+                          style: TextStyle(
+                            fontSize: 42,
+                            //fontWeight: FontWeight.bold,
+                            color: sColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onPressed: () {
@@ -181,17 +310,39 @@ class _ETableState extends State<ETable> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
-                    //shape: StadiumBorder(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black.withOpacity(0.5),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Color(0xFF8B4513),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    'โต๊ะที่ : 7',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "asset/image/table8.png",
+                          height: 100,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
+                        Text(
+                          'โต๊ะที่ : 7',
+                          style: TextStyle(
+                            fontSize: 42,
+                            //fontWeight: FontWeight.bold,
+                            color: sColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onPressed: () {
@@ -202,17 +353,39 @@ class _ETableState extends State<ETable> {
                   width: 100,
                 ),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
-                    //shape: StadiumBorder(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black.withOpacity(0.5),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Color(0xFF8B4513),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    'โต๊ะที่ : 8',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "asset/image/table8.png",
+                          height: 100,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
+                        Text(
+                          'โต๊ะที่ : 8',
+                          style: TextStyle(
+                            fontSize: 42,
+                            //fontWeight: FontWeight.bold,
+                            color: sColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onPressed: () {
@@ -228,17 +401,39 @@ class _ETableState extends State<ETable> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(50, 50, 50, 50),
-                    //shape: StadiumBorder(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black.withOpacity(0.5),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Color(0xFF8B4513),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    'โต๊ะที่ : 9',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 10),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "asset/image/table8.png",
+                          height: 100,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
+                        Text(
+                          'โต๊ะที่ : 9',
+                          style: TextStyle(
+                            fontSize: 42,
+                            //fontWeight: FontWeight.bold,
+                            color: sColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onPressed: () {
@@ -249,17 +444,39 @@ class _ETableState extends State<ETable> {
                   width: 100,
                 ),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: sColor,
-                    padding: EdgeInsets.fromLTRB(40, 50, 40, 50),
-                    //shape: StadiumBorder(),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Colors.black.withOpacity(0.5),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: Color(0xFF8B4513),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    'โต๊ะที่ : 10',
-                    style: TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
-                      color: pColor,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 15, 10),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "asset/image/table8.png",
+                          height: 100,
+                          width: 120,
+                          fit: BoxFit.fill,
+                        ),
+                        Text(
+                          'โต๊ะที่ : 10',
+                          style: TextStyle(
+                            fontSize: 42,
+                            //fontWeight: FontWeight.bold,
+                            color: sColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onPressed: () {
